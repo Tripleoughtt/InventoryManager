@@ -1,3 +1,11 @@
 body {
   background-color: grey;
 }
+
+.container {
+  border: 2px solid #000;
+}
+
+.itemsDiv{
+  border: 2px solid #000;
+}

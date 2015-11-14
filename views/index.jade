@@ -2,12 +2,73 @@ doctype html
 html(lang="en")
   head
     title Home
-    link(href="bower_components/bootstrap/dist/css/bootstrap.min.css")
-    link(href="css/style.css")
+    link(href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
+    link(rel="stylesheet", href="bower_components/font-awesome/css/font-awesome.min.css", media="all")
+    link(href="css/style.css" rel="stylesheet")
   body
     .container
       br
-      .jumbotron
-        h1 Hey!
+      .row.header
+        h1 Welcome to the Rooms page!
+        h1.col-xs-6 Create a room!
+        h1.col-xs-6 Create an item!
+      .row#roomCreate
+        div.col-xs-6
+          input#roomName.col-xs-6(type="text", placeholder="Room Name Here!", name="")
+          button.btn.btn-md.btn-primary.col-xs-3.submitRoom Submit Room!
+        div.col-xs-6
+          input#itemName.col-xs-3(type="text", placeholder="Item Name Here!")
+          input#itemCost.col-xs-3(type="number" placeholder="Price? $$$$$")
+          input#itemDescription.col-xs-3(type="text" placeholder="Item description here!")
+          button.btn.btn-md.btn-primary.col-xs-3.submitItem Submit Item!
+      
+
+      .row.items
+        
+        div.col-xs-6.col-xs-offset-6
+          h3.col-xs-6 Move an item!
+          h3.col-xs-6 To this room!
+          input.col-xs-4#itemMove(type="text" placeholder="Item to move!")
+          input.col-xs-4#roomMove(type="text" placeholder="Room to move to!")
+          button.btn.btn-md.moveItem.col-xs-3.btn-primary Move It!
+        
+        .itemsDiv.col-xs-12
+          h1 Your Items!
+          each item in items
+            h3.col-xs-3= item.name
+            h3.col-xs-3= item.price
+    .container
+      .row.rooms
+        h1 These are your rooms!   
+        each room in rooms
+          .room(id= room.name)
+            h1.roomName= room.name
+              button.btn.btn-md.btn-primary(data-toggle="collapse" data-target= "#" + room._id) Expand/Collapse
+              i.fa.fa-trash.fa-lg.deleteRoom
+          .collapse(id= room._id)
+            table.table.table-striped
+              thead
+                tr
+                  td 
+                    h1 Name
+                  td
+                    h1 Price
+                  td
+                    h1 Description
+                  td
+                    h1 Delete
+              tbody
+              each item in room.items
+                tr(id= item._id)
+                  td 
+                    h2= item.name
+                  td
+                    h2= item.value
+                  td
+                    h2= item.description 
+                  td
+                    h2
+                     i.fa.fa-trash.fa-lg.deleteItem          
     script(src='bower_components/jquery/dist/jquery.min.js')
+    script(src='bower_components/bootstrap/dist/js/bootstrap.min.js')
     script(src='js/main.js')

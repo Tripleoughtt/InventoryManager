@@ -23,7 +23,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/', (req, res) => {
   Item.findByIdAndRemove(req.params.id, function(err, item) {
     res.status(err ? 400 : 200).send(err ? 'item delete failed' : 'item deleted.');
   });
@@ -32,7 +32,7 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
   let item = new Item(req.body);
   item.save(err => {
-    res.status(err ? 400 : 200).send(err || `${req.body.name} added.`);
+    res.status(err ? 400 : 200).send(err ||  item );
   });
 });
 
